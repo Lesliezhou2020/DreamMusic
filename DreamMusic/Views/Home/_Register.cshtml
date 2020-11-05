@@ -1,0 +1,29 @@
+@using DreamMusic.Models
+@model User
+
+<h1>Register</h1>
+<form asp-action="Process_Register" asp-controller="Home"  method="post">
+    <div class="form-group">
+        <label asp-for="Name">Name:</label>
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <input asp-for="Name" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email:</label>
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <input asp-for="Email" type="email" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Password:</label>
+        <span asp-validation-for="Password" class="text-danger"></span>
+        <input asp-for="Password" type="password" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Confirm">Confirm Password:</label>
+        <span asp-validation-for="Confirm" class="text-danger"></span>
+        <input asp-for="Confirm" type="password" class="form-control">
+    </div>
+    <div class="form-group text-center">
+        <input type="submit" class="btn btn-primary" value="Register">
+    </div>
+</form>

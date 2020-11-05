@@ -1,0 +1,23 @@
+@model Login_Register_wrapper
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Index</title>
+        <link rel="stylesheet" href="~/css/style.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="text-center">Welcome! Join Now!</h1>
+            <div class="row justify-content-md-center">
+                <div class="col-sm-4 p-3 m-3 border">
+                    <partial name="_Register" model="@Model.Register" />
+                </div>    
+                <div class="col-sm-4 p-3 m-3 border">
+                    <partial name="_Login" model="@Model.Login" />
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
