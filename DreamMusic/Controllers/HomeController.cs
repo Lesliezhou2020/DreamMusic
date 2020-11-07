@@ -14,18 +14,35 @@ namespace DreamMusic.Controllers
     public class HomeController : Controller
     {
         private MyContext _context;
+        private Random rnd;
         
         public HomeController(MyContext context)
         {
             _context = context;
+            rnd = new Random();
         }
-
 
         [HttpGet("")]
         public IActionResult Index()
         {
-            string defaultBeats = "xxx-x--xxx--xx--xx---xxx-x-xxx--x-xx";
-            ViewBag.beats = defaultBeats;
+            int? active_user_id = HttpContext.Session.GetInt32("active_user");
+            if (!active_user_id.HasValue)
+            {
+                HttpContext.Session.SetInt32("active_user", -1);
+            }
+            DrumSheet random = new DrumSheet {
+                Crash      = generate(16),
+                Ride       = generate(16),
+                FloorTom   = generate(16),
+                MidTom     = generate(16),
+                HighTom    = generate(16),
+                Kick       = generate(16),
+                Snare      = generate(16),
+                HiHatOpen  = generate(16),
+                HiHatClose = generate(16),
+            };
+            ViewBag.sheet = random;
+            ViewBag.userId = active_user_id.HasValue ? active_user_id.Value : -1;
             return View();
         }
 
@@ -83,10 +100,21 @@ namespace DreamMusic.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet("new")]
-        public IActionResult Compose()
+        [HttpGet("logout")]
+        public IActionResult Logout()
         {
-            return View("Compose");
+            HttpContext.Session.SetInt32("active_user", -1);
+            return RedirectToAction("Index");
+        }
+
+        private string generate(int length)
+        {
+            var stringChars = new char[length];
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = rnd.Next(2) == 0 ? 'x' : '-';
+            }
+            return new string(stringChars);
         }
     }
 }

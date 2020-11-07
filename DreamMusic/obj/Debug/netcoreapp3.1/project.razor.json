@@ -14402,6 +14402,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/leslie/Desktop/C#/DreamMusic/DreamMusic/Views/Home/_Beats.cshtml",
+      "TargetPath": "Views\\Home\\_Beats.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/leslie/Desktop/C#/DreamMusic/DreamMusic/Views/Home/_Login.cshtml",
       "TargetPath": "Views\\Home\\_Login.cshtml",
       "FileKind": "mvc"

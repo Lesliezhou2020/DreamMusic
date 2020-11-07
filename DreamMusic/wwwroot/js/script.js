@@ -1,9 +1,8 @@
 // JavaScript Drum Kit App
 
 $(document).ready(function(){
-	const beats = $(".beats");
+	const beats = $(".form-control");
 	const audios = $("audio");
-	let playing = false;
 
 	const playingClass = 'playing',
 		crashRide = document.getElementById('crash-ride'),
@@ -75,31 +74,26 @@ $(document).ready(function(){
 	});
 
 	$("#stop").click(function() {
-		playing = false;
 	});
 
 	$("#play").click(async function() {
-		playing = true;
-		let iterations = $("#iterations")[0].value;
-		while (iterations > 0) {
-			console.log(iterations);
-			await play();
-			iterations--;
-		}
+		await play();
 	});
 
 	const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 	async function play() {
-		for (let step = 0; step < beats.length / 9; step++) {
-			for (let instrument = 0; instrument < 9; instrument++) {
-				if (beats[step * 9 + instrument].textContent == 'x') {
+		let interval = parseInt(document.getElementById("interval").value);
+		let claps = beats.toArray().map(b => b.value.length).reduce((x, y) => (x > y ? x : y), 0);
+		console.log(claps);
+
+		for (let clap = 0; clap < claps; clap++) {
+			for (let instrument = 0; instrument < beats.length; instrument++) {
+				if (beats[instrument].value[clap] == 'x') {
 					audios[instrument].play();
 				}
 			}
-			await sleepNow(500);
+			await sleepNow(interval);
 		}
-		await sleepNow(1000);
 	}
-
 });

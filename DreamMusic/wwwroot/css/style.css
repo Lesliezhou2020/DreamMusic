@@ -163,3 +163,13 @@ body {
 	font-family: 'Handlee', cursive;
 	vertical-align: middle;
 }
+
+.input-group>.input-group-prepend {
+    flex: 0 0 40%;
+}
+.input-group {
+	width: 80%;
+}
+.input-group-text {
+    width: 100%;
+}
