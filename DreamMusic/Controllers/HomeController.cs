@@ -28,8 +28,9 @@ namespace DreamMusic.Controllers
             int? active_user_id = HttpContext.Session.GetInt32("active_user");
             if (!active_user_id.HasValue)
             {
-                HttpContext.Session.SetInt32("active_user", -1);
+                active_user_id = -1;
             }
+
             DrumSheet random = new DrumSheet {
                 Crash      = generate(16),
                 Ride       = generate(16),
@@ -42,7 +43,19 @@ namespace DreamMusic.Controllers
                 HiHatClose = generate(16),
             };
             ViewBag.sheet = random;
-            ViewBag.userId = active_user_id.HasValue ? active_user_id.Value : -1;
+
+            User guest = new User {
+                UserId = -1
+            };
+
+            var user = _context.Users.FirstOrDefault(u => u.UserId == active_user_id.Value);
+            ViewBag.user = user == null? guest : user;
+            
+            var toplist = _context.DrumSheets.Include(c => c.Likes)
+                .OrderByDescending(c => c.Likes.Count)
+                .Take(10);
+            
+            ViewBag.toplist = toplist;
             return View();
         }
 
@@ -105,6 +118,33 @@ namespace DreamMusic.Controllers
         {
             HttpContext.Session.SetInt32("active_user", -1);
             return RedirectToAction("Index");
+        }
+
+        [HttpPost("new")]
+        public JsonResult New(DrumSheet data)
+        {
+            _context.Add(data);
+            _context.SaveChanges();
+            return Json(data);
+        }
+
+        [HttpGet("all")]
+        public IActionResult AllBeats()
+        {
+            int? active_user_id = HttpContext.Session.GetInt32("active_user");
+            if (!active_user_id.HasValue)
+            {
+                HttpContext.Session.SetInt32("active_user", -1);
+            }
+
+            User guest = new User {
+                UserId = -1
+            };
+
+            ViewBag.user = active_user_id.HasValue ?
+                _context.Users.FirstOrDefault(u => u.UserId == active_user_id.Value) : guest;
+            
+            return View("AllBeats");
         }
 
         private string generate(int length)

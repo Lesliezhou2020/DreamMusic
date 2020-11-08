@@ -80,6 +80,40 @@ $(document).ready(function(){
 		await play();
 	});
 
+	$("#save").click(function() {
+		const user_id = $("#meta_info").attr("user_id");
+		if (user_id == -1) {
+			location.href = "/sign";
+			return;
+		}
+
+		var title = prompt("Please enter the clap title", "");
+		if (title != null) {
+			let claps = beats.toArray().map(x => x.value);
+			console.log(name);
+			console.log(claps);
+			$.ajax({
+				type: "POST",
+				url: "new",
+				success: function (data) { console.log(data); },
+				data: {
+					title: title,
+					creatorId: user_id,
+					crash: claps[0],
+					ride: claps[1],
+					floorTom: claps[2],
+					midTom: claps[3],
+					highTom: claps[4],
+					kick: claps[5],
+					snare: claps[6],
+					hiHatOpen: claps[7],
+					hiHatClose: claps[8],
+				},
+				accept: 'application/json',
+			});
+		}
+	});
+
 	const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 	async function play() {

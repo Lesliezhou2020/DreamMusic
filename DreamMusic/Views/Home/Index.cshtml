@@ -14,20 +14,31 @@
     <script src="~/js/script.js"></script>
 </head>
 <body>
-    <div class="jumbotron" id="header" user_id=@ViewBag.userId>
-        @if(ViewBag.userId == -1)
+    <div class="jumbotron" id="meta_info" user_id=@ViewBag.user.UserId>
+        @if(ViewBag.user.UserId == -1)
         {
             <p><a href="/sign">Register/Login</a></p>
         } else {
-            <p>Welcome @ViewBag.userId! <a href="/logout">Logout</a></p>
+            <p>Welcome @ViewBag.user.Name! <a href="/logout">Logout</a></p>
         }
         <h1>Dream Music</h1>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                <h3 class="text-center">Popular Beats</h3>
-
+                <h3 class="text-center">Top 10 Beats</h3>
+                <p class="text-center"><a href="all">View All</a></p>
+                <table class="table-dark table-striped">
+                    <tbody>
+                        @foreach (var item in ViewBag.toplist)
+                        {
+                            <tr>
+                                <td class="col-sm-8">@item.Title</td>
+                                <td class="col-sm-4"><span class="badge badge-light">@item.Likes.Count</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
             <div class="col-sm-8">
                 <h2>Compose your own Clap</h2>

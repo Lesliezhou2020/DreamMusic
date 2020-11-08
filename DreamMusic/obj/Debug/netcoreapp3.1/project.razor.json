@@ -14412,6 +14412,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/leslie/Desktop/C#/DreamMusic/DreamMusic/Views/Home/AllBeats.cshtml",
+      "TargetPath": "Views\\Home\\AllBeats.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/leslie/Desktop/C#/DreamMusic/DreamMusic/Views/Home/Index.cshtml",
       "TargetPath": "Views\\Home\\Index.cshtml",
       "FileKind": "mvc"
@@ -14419,11 +14424,6 @@
     {
       "FilePath": "/Users/leslie/Desktop/C#/DreamMusic/DreamMusic/Views/Home/Sign.cshtml",
       "TargetPath": "Views\\Home\\Sign.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/leslie/Desktop/C#/DreamMusic/DreamMusic/Views/Home/Compose.cshtml",
-      "TargetPath": "Views\\Home\\Compose.cshtml",
       "FileKind": "mvc"
     }
   ],

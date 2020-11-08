@@ -9,5 +9,7 @@ namespace DreamMusic.Models
         public MyContext(DbContextOptions options) : base(options) {}
 
         public DbSet<User> Users {get; set;}
+        public DbSet<DrumSheet> DrumSheets {get; set;}
+        public DbSet<Like> Likes {get; set;}
     }
 }

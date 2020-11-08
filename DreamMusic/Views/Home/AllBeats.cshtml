@@ -14,9 +14,14 @@
 </head>
 <body>
     <div class="container">
-        <ul>
-            <li><button class="btn btn-primary">Save</button></li>
-        </ul>
+        <div class="jumbotron" id="meta_info" user_id=@ViewBag.userId>
+            @if(ViewBag.userId == -1)
+            {
+                <p><a href="/sign">Register/Login</a></p>
+            } else {
+                <p>Welcome @ViewBag.userId! <a href="/logout">Logout</a></p>
+            }
+        </div>
     </div>
     <audio data-key="74" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/snare.wav"></audio>
     <audio data-key="66" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/kick.wav"></audio>

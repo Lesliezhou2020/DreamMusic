@@ -55,5 +55,5 @@
 /Users/leslie/Desktop/C#/DreamMusic/DreamMusic/bin/Debug/netcoreapp3.1/Pomelo.JsonObject.dll
 /Users/leslie/Desktop/C#/DreamMusic/DreamMusic/bin/Debug/netcoreapp3.1/System.Collections.Immutable.dll
 /Users/leslie/Desktop/C#/DreamMusic/DreamMusic/bin/Debug/netcoreapp3.1/System.Diagnostics.DiagnosticSource.dll
-/Users/leslie/Desktop/C#/DreamMusic/DreamMusic/obj/Debug/netcoreapp3.1/Razor/Views/Home/Compose.cshtml.g.cs
 /Users/leslie/Desktop/C#/DreamMusic/DreamMusic/obj/Debug/netcoreapp3.1/Razor/Views/Home/_Beats.cshtml.g.cs
+/Users/leslie/Desktop/C#/DreamMusic/DreamMusic/obj/Debug/netcoreapp3.1/Razor/Views/Home/AllBeats.cshtml.g.cs
