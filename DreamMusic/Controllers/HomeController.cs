@@ -134,17 +134,104 @@ namespace DreamMusic.Controllers
             int? active_user_id = HttpContext.Session.GetInt32("active_user");
             if (!active_user_id.HasValue)
             {
-                HttpContext.Session.SetInt32("active_user", -1);
+                active_user_id = -1;
             }
-
+            
             User guest = new User {
                 UserId = -1
             };
 
-            ViewBag.user = active_user_id.HasValue ?
-                _context.Users.FirstOrDefault(u => u.UserId == active_user_id.Value) : guest;
-            
+            var user = _context.Users.FirstOrDefault(u => u.UserId == active_user_id.Value);
+            ViewBag.user = user == null? guest : user;
+            ViewBag.AllBeats = _context.DrumSheets
+                .Include(d => d.Creator)
+                .Include(d => d.Likes)
+                .OrderByDescending(d => d.Likes.Count);
             return View("AllBeats");
+        }
+
+        [HttpGet("detail/{sheetId}")]
+        public IActionResult Detail(int sheetId)
+        {
+            int? active_user_id = HttpContext.Session.GetInt32("active_user");
+            if (!active_user_id.HasValue)
+            {
+                active_user_id = -1;
+            }
+            
+            User guest = new User {
+                UserId = -1
+            };
+
+            var user = _context.Users.FirstOrDefault(u => u.UserId == active_user_id.Value);
+            ViewBag.user = user == null? guest : user;
+
+            var sheet = _context.DrumSheets
+                .Include(d => d.Creator)
+                .Include(d => d.Likes)
+                .FirstOrDefault(d => d.SheetId == sheetId);
+            if (sheet == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View("Detail", sheet);
+        }
+
+        [HttpPost("update")]
+        public IActionResult Update(DrumSheet fromForm)
+        {
+            _context.Update(fromForm);
+            _context.Entry(fromForm).Property("CreatedAt").IsModified = false;
+            _context.SaveChanges();
+            return RedirectToAction("Detail", new { sheetId = fromForm.SheetId });
+        }
+
+        [HttpGet("delete/{sheetId}")]
+        public IActionResult Delete(int sheetId)
+        {
+            int? active_user_id = HttpContext.Session.GetInt32("active_user");
+            if (active_user_id.HasValue && active_user_id != -1)
+            {
+                var sheet = _context.DrumSheets.FirstOrDefault(d => d.SheetId == sheetId);
+                if (sheet != null && sheet.CreatorId == active_user_id) {
+                    _context.DrumSheets.Remove(sheet);
+                    _context.SaveChanges();
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet("like/{sheetId}")]
+        public IActionResult Like(int sheetId)
+        {
+            int ? active_user = HttpContext.Session.GetInt32("active_user");
+            if (active_user.HasValue && active_user != -1)
+            {
+                Like like = new Like();
+                like.SheetId = sheetId;
+                like.UserId = active_user.Value;
+                _context.Likes.Add(like);
+                _context.SaveChanges();
+                return RedirectToAction("Detail", new { sheetId = sheetId });
+            }
+            return RedirectToAction("Sign");
+        }
+
+        [HttpGet("unlike/{sheetId}")]
+        public IActionResult Unlike(int sheetId)
+        {
+            int ? active_user = HttpContext.Session.GetInt32("active_user");
+            if (active_user.HasValue && active_user != -1)
+            {
+                var like = _context.Likes
+                    .FirstOrDefault(l => l.UserId == active_user.Value && l.SheetId == sheetId);
+                if (like != null) {
+                    _context.Likes.Remove(like);
+                    _context.SaveChanges();
+                }
+                return RedirectToAction("Detail", new { sheetId = sheetId });
+            }
+            return RedirectToAction("Sign");
         }
 
         private string generate(int length)

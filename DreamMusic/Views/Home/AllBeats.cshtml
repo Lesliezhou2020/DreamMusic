@@ -15,23 +15,28 @@
 <body>
     <div class="container">
         <div class="jumbotron" id="meta_info" user_id=@ViewBag.userId>
-            @if(ViewBag.userId == -1)
-            {
-                <p><a href="/sign">Register/Login</a></p>
-            } else {
-                <p>Welcome @ViewBag.userId! <a href="/logout">Logout</a></p>
-            }
+            <a href="/">&#x2630; Home</a>
+            <h1 class="text-center">All Drums Sheets</h1>
         </div>
+        <table class="table-dark table-striped col-sm-12">
+            <thead>
+                <tr>
+                    <th class="col-sm-6">Title</th>
+                    <th class="col-sm-3">Author</th>
+                    <th class="col-sm-3">Likes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.AllBeats)
+                {
+                    <tr>
+                        <td><a href="/detail/@item.SheetId">@item.Title</a></td>
+                        <td><span class="badge badge-light">@item.Creator.Name</span></td>
+                        <td class="text-center">@item.Likes.Count</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-    <audio data-key="74" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/snare.wav"></audio>
-    <audio data-key="66" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/kick.wav"></audio>
-    <audio data-key="86" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/kick.wav"></audio>
-    <audio data-key="72" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/tom-high.wav"></audio>
-    <audio data-key="71" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/tom-mid.wav"></audio>
-    <audio data-key="70" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/tom-low.wav"></audio>
-    <audio data-key="69" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/crash.wav"></audio>
-    <audio data-key="82" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/ride.wav"></audio>
-    <audio data-key="73" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/hihat-open.wav"></audio>
-    <audio data-key="75" src="https://raw.githubusercontent.com/ArunMichaelDsouza/javascript-30-course/master/src/01-javascript-drum-kit/sounds/hihat-close.wav"></audio>
 </body>
 </html>

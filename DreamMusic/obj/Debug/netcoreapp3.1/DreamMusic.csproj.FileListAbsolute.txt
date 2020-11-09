@@ -57,3 +57,4 @@
 /Users/leslie/Desktop/C#/DreamMusic/DreamMusic/bin/Debug/netcoreapp3.1/System.Diagnostics.DiagnosticSource.dll
 /Users/leslie/Desktop/C#/DreamMusic/DreamMusic/obj/Debug/netcoreapp3.1/Razor/Views/Home/_Beats.cshtml.g.cs
 /Users/leslie/Desktop/C#/DreamMusic/DreamMusic/obj/Debug/netcoreapp3.1/Razor/Views/Home/AllBeats.cshtml.g.cs
+/Users/leslie/Desktop/C#/DreamMusic/DreamMusic/obj/Debug/netcoreapp3.1/Razor/Views/Home/Detail.cshtml.g.cs

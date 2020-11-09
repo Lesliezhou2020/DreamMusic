@@ -63,8 +63,10 @@ $(document).ready(function(){
 		key.addEventListener('transitionend', removeKeyTransition);
 	});
 
-	crashRide.addEventListener('transitionend', removeCrashRideTransition);
-	hiHatTop.addEventListener('transitionend', removeHiHatTopTransition);
+	if (crashRide != null && hiHatTop != null) {
+		crashRide.addEventListener('transitionend', removeCrashRideTransition);
+		hiHatTop.addEventListener('transitionend', removeHiHatTopTransition);
+	}
 
 	window.addEventListener('keydown', playSound);
 

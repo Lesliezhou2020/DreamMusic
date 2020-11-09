@@ -1,5 +1,3 @@
-@using DreamMusic.Models
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +31,7 @@
                         @foreach (var item in ViewBag.toplist)
                         {
                             <tr>
-                                <td class="col-sm-8">@item.Title</td>
+                                <td class="col-sm-8"><a href="/detail/@item.SheetId">@item.Title</a></td>
                                 <td class="col-sm-4"><span class="badge badge-light">@item.Likes.Count</span></td>
                             </tr>
                         }
